@@ -13,8 +13,8 @@ RUN npm install
 # Copy the rest of the application
 COPY . .
 
-# Build the application for production
-RUN npm run build -- --configuration production
+# Build the application for production with Docker environment
+RUN cp src/environments/environment.docker.ts src/environments/environment.prod.ts && npm run build -- --configuration=production
 
 # Stage 2: Serve the application with Nginx
 FROM nginx:alpine
