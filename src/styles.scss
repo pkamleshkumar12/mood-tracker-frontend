@@ -1,1 +1,59 @@
 /* You can add global styles to this file, and also import other style files */
+
+html, body { height: 100%; }
+body { 
+  margin: 0; 
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+  background-color: #f5f5f5;
+}
+
+/* Custom Material theme overrides */
+.mat-mdc-dialog-container .mdc-dialog__surface {
+  border-radius: 8px !important;
+}
+
+.mat-mdc-snack-bar-container {
+  &.error-snackbar {
+    --mdc-snackbar-container-color: #f44336;
+    --mat-mdc-snack-bar-button-color: #fff;
+    --mdc-snackbar-supporting-text-color: #fff;
+  }
+
+  &.success-snackbar {
+    --mdc-snackbar-container-color: #4caf50;
+    --mat-mdc-snack-bar-button-color: #fff;
+    --mdc-snackbar-supporting-text-color: #fff;
+  }
+  
+  &.info-snackbar {
+    --mdc-snackbar-container-color: #2196f3;
+    --mat-mdc-snack-bar-button-color: #fff;
+    --mdc-snackbar-supporting-text-color: #fff;
+  }
+  
+  &.warning-snackbar {
+    --mdc-snackbar-container-color: #ff9800;
+    --mat-mdc-snack-bar-button-color: #fff;
+    --mdc-snackbar-supporting-text-color: #fff;
+  }
+}
+
+/* Global snackbar positioning - make all snackbars appear at the top */
+.cdk-global-overlay-wrapper {
+  .mat-mdc-snack-bar-container {
+    margin-top: 20px !important;
+    margin-bottom: auto !important;
+  }
+}
+
+/* Override Angular Material's default snackbar positioning */
+.mat-mdc-snack-bar-container {
+  position: relative !important;
+}
+
+.cdk-overlay-pane.mat-mdc-snack-bar-container-bottom {
+  margin-top: 0 !important;
+  margin-bottom: auto !important;
+  top: 20px !important;
+  bottom: auto !important;
+}

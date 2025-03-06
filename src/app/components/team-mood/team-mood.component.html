@@ -1,0 +1,41 @@
+<div class="team-mood-container">
+  <mat-card class="team-mood-card">
+    <mat-card-header>
+      <mat-card-title>Welcome to Mood Tracker</mat-card-title>
+      <mat-card-subtitle>Track and share your team's mood</mat-card-subtitle>
+    </mat-card-header>
+    
+    <mat-card-content>
+      <!-- Only show team mood data if showTeamMood is true -->
+      <div *ngIf="showTeamMood">
+        <div class="team-mood">
+          <mat-icon class="mood-icon">groups</mat-icon>
+          <span class="mood-text">{{ teamResponse.teamMood }}</span>
+        </div>
+        
+        <mat-divider></mat-divider>
+        
+        <div *ngIf="teamResponse.teamMessages && teamResponse.teamMessages.length > 0" class="team-messages">
+          <h3>Team Comments</h3>
+          <mat-list>
+            <mat-list-item *ngFor="let message of teamResponse.teamMessages">
+              <div class="message-item">
+                <mat-icon>comment</mat-icon>
+                <span>{{ message }}</span>
+              </div>
+            </mat-list-item>
+          </mat-list>
+        </div>
+        
+        <div *ngIf="!teamResponse.teamMessages || teamResponse.teamMessages.length === 0" class="no-messages">
+          <p>No team comments for today</p>
+        </div>
+      </div>
+      
+      <!-- Show a message if team mood data is not available -->
+      <div *ngIf="!showTeamMood" class="no-team-data">
+        <p>Share how you're feeling today and see your team's overall mood.</p>
+      </div>
+    </mat-card-content>
+  </mat-card>
+</div> 

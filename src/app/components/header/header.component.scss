@@ -1,0 +1,48 @@
+.header-toolbar {
+  display: flex;
+  justify-content: space-between;
+  padding: 0 16px;
+  background-color: #1e1e1e;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  font-size: 1.2rem;
+  font-weight: 500;
+  
+  .logo-image {
+    height: 32px;
+    margin-right: 12px;
+    object-fit: contain;
+    display: block;
+  }
+  
+  span {
+    font-family: 'Roboto Mono', monospace;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    color: white;
+  }
+}
+
+.spacer {
+  flex: 1 1 auto;
+}
+
+.nav-buttons {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  
+  button {
+    margin-left: 8px;
+    font-family: 'Roboto Mono', monospace;
+  }
+}
+
+@media (max-width: 768px) {
+  .nav-buttons button:not(:last-child) {
+    display: none;
+  }
+} 

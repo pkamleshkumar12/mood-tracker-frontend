@@ -1,0 +1,12 @@
+version: '3.8'
+
+services:
+  mood-tracker-frontend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "4200:80"
+    restart: unless-stopped
+    environment:
+      - NODE_ENV=production 

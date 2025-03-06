@@ -1,59 +1,80 @@
-# MoodTracker
+# Mood Tracker Application
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.2.0.
+A modern Angular application with Material UI for tracking team moods, connecting to a Spring Boot backend.
 
-## Development server
+## Features
 
-To start a local development server, run:
+- Clean, responsive UI built with Angular Material
+- Team mood tracking with emoji selection
+- Anonymous comment submission
+- Team mood visualization
+- Cookie-based session tracking
 
+## Project Structure
+
+- **Components**:
+  - Header: Top navigation bar with mood tracker button
+  - Mood Dialog: Dialog for submitting mood and comments
+  - Team Mood: Component for displaying team mood data
+
+- **Services**:
+  - Mood Service: Handles API calls to the backend
+
+- **Models**:
+  - Mood models for data structure
+
+- **Interceptors**:
+  - Cookie interceptor for proper cookie handling
+
+## API Integration
+
+The application connects to a Spring Boot backend with two endpoints:
+1. POST /internal-api/init-team - Initializes the team session
+2. POST /internal-api/moods - Submits a mood entry
+
+## Getting Started
+
+### Prerequisites
+
+- Node.js (v14 or higher)
+- npm (v6 or higher)
+
+### Installation
+
+1. Clone the repository
+```bash
+git clone <repository-url>
+cd mood-tracker-frontend
+```
+
+2. Install dependencies
+```bash
+npm install
+```
+
+3. Start the development server
 ```bash
 ng serve
 ```
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+4. Open your browser and navigate to `http://localhost:4200`
 
-## Code scaffolding
+## Configuration
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+The application is configured to connect to a backend API. You can modify the API endpoints in the `src/environments/environment.ts` file.
 
-```bash
-ng generate component component-name
-```
-
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+## Building for Production
 
 ```bash
-ng generate --help
+ng build --configuration production
 ```
 
-## Building
-
-To build the project run:
-
-```bash
-ng build
-```
-
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
-
-## Running unit tests
-
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
+## Running Tests
 
 ```bash
 ng test
 ```
 
-## Running end-to-end tests
+## License
 
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+This project is licensed under the MIT License - see the LICENSE file for details.

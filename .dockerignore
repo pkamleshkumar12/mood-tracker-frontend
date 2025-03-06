@@ -1,0 +1,40 @@
+# Node modules and logs
+node_modules
+npm-debug.log
+yarn-error.log
+
+# Build output
+dist
+tmp
+out-tsc
+
+# Git and version control
+.git
+.gitignore
+.github
+
+# IDE files
+.idea
+.vscode
+*.sublime-workspace
+*.sublime-project
+
+# Testing
+coverage
+.nyc_output
+*.lcov
+
+# System files
+.DS_Store
+Thumbs.db
+
+# Docker files (not needed in build context)
+Dockerfile
+docker-compose.yml
+.dockerignore
+
+# Documentation
+README.md
+CHANGELOG.md
+LICENSE
+docs 

@@ -1,0 +1,102 @@
+.team-mood-container {
+  margin: 24px auto;
+  max-width: 800px;
+  padding: 0 16px;
+}
+
+.team-mood-card {
+  width: 100%;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.team-mood {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 24px 0;
+  padding: 24px;
+  background-color: #f5f5f5;
+  border-radius: 8px;
+  text-align: center;
+}
+
+.mood-icon {
+  font-size: 36px;
+  height: 36px;
+  width: 36px;
+  margin-right: 16px;
+  color: #2196f3;
+}
+
+.mood-text {
+  font-size: 24px;
+  font-weight: 500;
+}
+
+.team-messages {
+  margin-top: 24px;
+}
+
+.message-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 8px 0;
+}
+
+.no-messages {
+  margin-top: 16px;
+  padding: 16px;
+  background-color: #f5f5f5;
+  border-radius: 8px;
+  text-align: center;
+  color: rgba(0, 0, 0, 0.6);
+}
+
+.no-team-data {
+  text-align: center;
+  padding: 32px 16px;
+  color: rgba(0, 0, 0, 0.7);
+  font-size: 18px;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  margin: 24px 0;
+}
+
+h3 {
+  margin-top: 24px;
+  margin-bottom: 16px;
+  font-weight: 500;
+  color: rgba(0, 0, 0, 0.8);
+  text-align: center;
+}
+
+mat-card-actions {
+  display: flex;
+  justify-content: center;
+  padding: 16px;
+}
+
+mat-card-actions button {
+  min-width: 180px;
+  font-weight: 500;
+}
+
+@media (max-width: 600px) {
+  .team-mood-container {
+    margin: 16px auto;
+    padding: 0 8px;
+  }
+  
+  .mood-icon {
+    font-size: 28px;
+    height: 28px;
+    width: 28px;
+  }
+  
+  .mood-text {
+    font-size: 20px;
+  }
+} 

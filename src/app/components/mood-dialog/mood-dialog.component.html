@@ -1,0 +1,112 @@
+<h2 mat-dialog-title>Team Mood Tracker</h2>
+
+<mat-dialog-content>
+  <!-- Loading spinner -->
+  <div class="loading-container" *ngIf="isLoading">
+    <mat-spinner diameter="40"></mat-spinner>
+  </div>
+
+  <!-- Already submitted message -->
+  <div *ngIf="alreadySubmittedToday && !isLoading">
+    <div class="already-submitted-message">
+      You have already submitted your mood for today!
+    </div>
+  </div>
+
+  <!-- Mood form - only show if not submitted and not already submitted today -->
+  <div *ngIf="!isSubmitted && !alreadySubmittedToday && !isLoading">
+    <div class="intro-text">
+      How are you feeling today? Your response will be anonymous.
+    </div>
+
+    <form [formGroup]="moodForm" (ngSubmit)="onSubmit()">
+      <div class="mood-options">
+        <label>Select your mood:</label>
+        <mat-radio-group formControlName="moodCategory" class="mood-radio-group">
+          <div *ngFor="let category of moodCategories" class="mood-category-option">
+            <mat-radio-button [value]="category">
+              {{ category }}
+            </mat-radio-button>
+          </div>
+        </mat-radio-group>
+      </div>
+
+      <div class="comment-section">
+        <mat-form-field class="full-width" appearance="fill">
+          <mat-label>Share your thoughts (optional)</mat-label>
+          <textarea 
+            matInput 
+            formControlName="moodDescription" 
+            placeholder="What's on your mind today?"
+            [maxlength]="maxCommentLength"
+            rows="3">
+          </textarea>
+          <div class="char-count">
+            {{ getRemainingCharacters() }} characters remaining
+          </div>
+        </mat-form-field>
+      </div>
+
+      <div class="form-actions">
+        <button mat-button mat-dialog-close type="button">Cancel</button>
+        <button 
+          mat-raised-button 
+          color="primary" 
+          type="submit"
+          [disabled]="!moodForm.valid || isLoading">
+          Submit
+        </button>
+      </div>
+    </form>
+  </div>
+
+  <!-- Success message - only show if submitted and not already submitted today -->
+  <div *ngIf="isSubmitted && !alreadySubmittedToday && !isLoading">
+    <div class="success-message">
+      Thank you for sharing your mood today!
+    </div>
+  </div>
+
+  <!-- Team mood summary - show after submission or if already submitted -->
+  <div *ngIf="(isSubmitted || alreadySubmittedToday) && teamResponse && !isLoading" class="team-mood-summary">
+    <h2 class="team-mood-title">Overall Team Mood for Today</h2>
+    
+    <div class="team-mood-display">
+      <mat-icon>mood</mat-icon>
+      <span class="team-mood-text">{{ teamResponse.teamMood }}</span>
+    </div>
+    
+    <div class="team-comments-section" *ngIf="teamResponse.teamMessages && teamResponse.teamMessages.length > 0">
+      <h3 class="comments-title">Team Comments</h3>
+      
+      <!-- Quote-style carousel for team comments -->
+      <div class="comments-carousel">
+        <div class="quote-icon">❝</div>
+        
+        <div class="carousel-container">
+          <div class="carousel-slide" *ngFor="let message of teamResponse.teamMessages; let i = index" 
+               [class.active]="i === currentCommentIndex">
+            <div class="comment-content">{{ message }}</div>
+          </div>
+        </div>
+        
+        <!-- Carousel navigation dots -->
+        <div class="carousel-dots" *ngIf="teamResponse.teamMessages.length > 1">
+          <span *ngFor="let message of teamResponse.teamMessages; let i = index" 
+                class="dot" 
+                [class.active]="i === currentCommentIndex"
+                (click)="setCurrentComment(i)"></span>
+        </div>
+      </div>
+      
+      <!-- No comments message -->
+      <div class="no-comments" *ngIf="teamResponse.teamMessages.length === 0">
+        No team comments available for today.
+      </div>
+    </div>
+  </div>
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+  <button mat-button (click)="closeDialog()">Close</button>
+</mat-dialog-actions> 
