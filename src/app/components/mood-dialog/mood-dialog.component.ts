@@ -22,6 +22,7 @@ import { Subscription, interval } from 'rxjs';
 
 interface DialogData {
   teamCode: string;
+  initialTeamResponse?: TeamMoodResponse;
 }
 
 @Component({
@@ -75,7 +76,14 @@ export class MoodDialogComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.createForm();
-    this.tryInitTeam();
+    
+    // Use initial team response if provided, otherwise initialize
+    if (this.data.initialTeamResponse) {
+      this.teamResponse = this.data.initialTeamResponse;
+      this.handleTeamResponse(this.teamResponse);
+    } else {
+      this.tryInitTeam();
+    }
     
     // Start the comment rotation if there are comments
     this.startCommentRotation();
@@ -341,5 +349,23 @@ export class MoodDialogComponent implements OnInit, OnDestroy {
   private restartCommentRotation(): void {
     this.stopCommentRotation();
     this.startCommentRotation();
+  }
+
+  private handleTeamResponse(response: TeamMoodResponse): void {
+    if (response.isDuplicate || response.alreadySubmitted) {
+      this.alreadySubmittedToday = true;
+      this.isSubmitted = true;
+      
+      if (response.isDuplicate) {
+        this.snackBar.open(response.duplicateMessage || 'You have already submitted your mood for today!', 'OK', {
+          duration: 5000,
+          panelClass: 'info-snackbar',
+          verticalPosition: 'top',
+          horizontalPosition: 'center'
+        });
+      }
+      
+      this.startCarouselIfNeeded();
+    }
   }
 } 

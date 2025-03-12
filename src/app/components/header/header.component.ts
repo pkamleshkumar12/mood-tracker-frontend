@@ -7,6 +7,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 import { MoodService } from '../../services/mood.service';
 import { environment } from '../../../environments/environment';
+import { TeamMoodResponse } from '../../models/mood.model';
 
 @Component({
   selector: 'app-header',
@@ -18,24 +19,39 @@ import { environment } from '../../../environments/environment';
 export class HeaderComponent {
   // Default team code from environment
   private teamCode: string = environment.defaultTeamCode;
+  private teamResponse: TeamMoodResponse | null = null;
   
   constructor(
     private dialog: MatDialog,
     private moodService: MoodService,
     private snackBar: MatSnackBar
-  ) {}
+  ) {
+    // Get initial team response when component is created
+    this.moodService.initTeam(this.teamCode).subscribe({
+      next: (response) => {
+        this.teamResponse = response;
+      },
+      error: (error) => {
+        console.error('Error getting team response:', error);
+      }
+    });
+  }
 
   openMoodDialog(): void {
     const dialogRef = this.dialog.open(MoodDialogComponent, {
       width: '600px',
       maxWidth: '90vw',
       maxHeight: '90vh',
-      data: { teamCode: this.teamCode }
+      data: { 
+        teamCode: this.teamCode,
+        initialTeamResponse: this.teamResponse 
+      }
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log('Dialog closed with result:', result);
-      // Handle the result if needed
+      if (result) {
+        this.teamResponse = result;
+      }
     });
   }
 

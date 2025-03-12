@@ -76,7 +76,10 @@ export class TeamMoodComponent implements OnInit {
     // Open the dialog directly without checking first
     const dialogRef = this.dialog.open(MoodDialogComponent, {
       width: '500px',
-      data: { teamCode: this.teamCode }
+      data: { 
+        teamCode: this.teamCode,
+        initialTeamResponse: this.teamResponse 
+      }
     });
     
     dialogRef.afterClosed().subscribe(result => {
